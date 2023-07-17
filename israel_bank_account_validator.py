@@ -12,11 +12,11 @@ SUPPORTED_BANKS = {
     'DISCOUNT': 11,
     'HAPOALIM': 12,
     'IGUD': 13,
-    'OTSAR_AHAYAL': 14,
+    'OTSAR_HAHAYAL': 14,
     'MERCANTILE': 17,
     'ONE_ZERO': 18,
     'MIZRAHI_TEFAHOT': 20,
-    'CITIBANK': 22,
+    'CITYBANK': 22,
     'HSBC': 23,
     'BEINLEUMI': 31,
     'ARAVEI_ISRAELI': 34,
@@ -58,55 +58,50 @@ def validate_bank_account(bank_number: Union[int, str], branch_number: Union[int
         logger.error("No validator found for the given bank")
         return False
 
+    account_number_digits = number_digits_to_list(account_number, 9)
     branch_number_digits = number_digits_to_list(branch_number, 3)
 
     # Apply the bank-specific validation rule
-    return validator(account_number, branch_number, branch_number_digits)
+    return validator(branch_number, account_number_digits, branch_number_digits)
 
 
 # Define the validator functions for each bank
 # NOTE: The implementation of these functions depends on the specific rules for each bank.
 # I've left the bodies of these functions empty because I don't have the exact rules.
-def yahav_validator(account_number, branch_number, branch_number_digits) -> bool:
-    account_number_digits = number_digits_to_list(account_number, 6)
+def yahav_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
     sum_val = scalar_product(account_number_digits[:6], [1, 2, 3, 4, 5, 6])
     sum_val += scalar_product(branch_number_digits[:4], [7, 8, 9])
     remainder = sum_val % 11
     return remainder in [0, 2]
 
 
-def post_validator(account_number, branch_number, account_number_digits) -> bool:
-    account_number_digits = number_digits_to_list(account_number, 9)
+def post_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
     sum_val = scalar_product(account_number_digits[:9], [1, 2, 3, 4, 5, 6, 7, 8, 9])
     remainder = sum_val % 10
     return remainder == 0
 
 
-def discount_validator(account_number, branch_number, account_number_digits) -> bool:
-    account_number_digits = number_digits_to_list(account_number, 9)
+def discount_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
     sum_val = scalar_product(account_number_digits[:9], [1, 2, 3, 4, 5, 6, 7, 8, 9])
     remainder = sum_val % 11
     return remainder in [0, 2, 4]
 
 
-def hapoalim_validator(account_number, branch_number, branch_number_digits) -> bool:
-    account_number_digits = number_digits_to_list(account_number, 6)
+def hapoalim_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
     sum_val = scalar_product(account_number_digits[:6], [1, 2, 3, 4, 5, 6])
     sum_val += scalar_product(branch_number_digits[:4], [7, 8, 9])
     remainder = sum_val % 11
     return remainder in [0, 2, 4, 6]
 
 
-def igud_validator(account_number, branch_number, branch_number_digits) -> bool:
-    account_number_digits = number_digits_to_list(account_number, 8)
+def igud_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
     sum_val = scalar_product(account_number_digits[:8], [1, 10, 2, 3, 4, 5, 6, 7])
     sum_val += scalar_product(branch_number_digits[:4], [8, 9, 10])
     remainder = sum_val % 100
     return remainder in [90, 72, 70, 60, 20]
 
 
-def otsar_ahayal_validator(account_number, branch_number, branch_number_digits) -> bool:
-    account_number_digits = number_digits_to_list(account_number, 6)
+def otsar_hahayal_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
     sum_val = scalar_product(account_number_digits[:6], [1, 2, 3, 4, 5, 6])
     sum_val += scalar_product(branch_number_digits[:4], [7, 8, 9])
     remainder = sum_val % 11
@@ -128,9 +123,7 @@ def otsar_ahayal_validator(account_number, branch_number, branch_number_digits) 
             return remainder == 0
 
 
-def one_zero_validator(account_number, branch_number, branch_number_digits) -> bool:
-    account_number_digits = number_digits_to_list(account_number, 9)
-
+def one_zero_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
     # Combine the digits into a single number
     check_number = int(''.join(map(str, branch_number_digits + account_number_digits[:-2])))
 
@@ -145,24 +138,23 @@ def one_zero_validator(account_number, branch_number, branch_number_digits) -> b
     return check_digits_calculated == check_digits_original
 
 
-def leumi_validator(account_number, branch_number, branch_number_digits) -> bool:
-    account_number_digits = number_digits_to_list(account_number, 8)
+def leumi_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
     # Account types
     account_types = [110, 128, 180, 330, 340]
 
     # Multipliers for branch and account number digits
-    branch_multipliers = [2, 3, 4, 5, 6, 7]
-    account_multipliers = [8, 9, 10]
+    account_multipliers = [2, 3, 4, 5, 6, 7]
+    branch_multipliers = [8, 9, 10]
 
     # Step 1: Multiply digits by their respective multipliers and add the products together
-    total = sum(b_d * b_m for b_d, b_m in zip(branch_number_digits, branch_multipliers))
-    total += sum(a_d * a_m for a_d, a_m in zip(account_number_digits[:3], account_multipliers))
+    total = scalar_product(account_number_digits[:8], account_multipliers)
+    total += scalar_product(branch_number_digits[:4], branch_multipliers)
 
     # Step 2: Add each account type to the total and check against the control digits
-    control_digits = account_digits[-2:]
+    control_digits = branch_number_digits[-2:]
     for account_type in account_types:
         # Skip account type 110 if the 5th and 6th digits do not match certain criteria
-        if account_type == 110 and (branch_number_digits[4:6] not in [[2, 0], [2, 3], [0, 0], [8, 0]]):
+        if account_type == 110 and (account_number_digits[4:6] not in [[2, 0], [2, 3], [0, 0], [8, 0]]):
             continue
         check_total = total + account_type
         # Step 3: Calculate the difference between 100 and the last two digits of check_total
@@ -175,8 +167,7 @@ def leumi_validator(account_number, branch_number, branch_number_digits) -> bool
     return False
 
 
-def mizrahi_validator(account_number, branch_number, branch_number_digits) -> bool:
-    account_number_digits = number_digits_to_list(account_number, 6)
+def mizrahi_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
     if MIZRAHI_BANK_NUMBER_THRESHOLD_MIN <= branch_number <= MIZRAHI_BANK_NUMBER_THRESHOLD_MAX:
         branch_number -= MIZRAHI_TEFAHOT_THRESHOLD
     sum_val = scalar_product(account_number_digits[:6], [1, 2, 3, 4, 5, 6])
@@ -185,45 +176,96 @@ def mizrahi_validator(account_number, branch_number, branch_number_digits) -> bo
     return remainder in [0, 2, 4]
 
 
-def citybank_validator(account_number, branch_number, branch_number_digits) -> bool:
-    # Validation rules for citybank
-    pass
+def citybank_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
+    # Multiply each digit by its factor and sum the results
+    sum_val = scalar_product(account_number_digits[:-1], [2, 3, 4, 5, 6, 7, 2, 3])
+
+    # Calculate the remainder when divided by 11
+    remainder = sum_val % 11
+
+    # Calculate the check digit
+    check_digit_calculated = (11 - remainder) % 10  # the %10 operation ensures the result is a single digit
+
+    # Extract the original check digit
+    check_digit_original = account_number_digits[-1]
+
+    # Return True if the calculated check digit matches the original check digit, otherwise return False
+    return check_digit_calculated == check_digit_original
 
 
-def hsbc_validator(account_number, branch_number, branch_number_digits) -> bool:
-    # Validation rules for hsbc
-    pass
+def hsbc_validator(branch_number, account_number_digit, branch_number_digits) -> bool:
+    if branch_number == 101:
+        # The seventh digit from the left should be 4
+        if account_number_digit[2] != 4:
+            return False
+
+    elif branch_number == 102:
+        # There is only one valid account number: 001
+        if account_number_digit[-3:] != [0, 0, 1]:
+            return False
+
+    # If no rules were broken, the account number is valid
+    return True
 
 
-def beinleumi_validator(account_number, branch_number, branch_number_digits) -> bool:
-    # Validation rules for beinleumi
-    pass
+def beinleumi_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
+    sum_val = scalar_product(account_number_digits[:9], [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    remainder = sum_val % 11
+    if remainder in [0, 6]:
+        return True
+    else:
+        sum_val = scalar_product(account_number_digits[:6], [1, 2, 3, 4, 5, 6])
+        remainder = sum_val % 11
+        return remainder in [0, 6]
+
+
+def masad_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
+    sum_val = scalar_product(account_number_digits[:6], [1, 2, 3, 4, 5, 6])
+    sum_val += scalar_product(branch_number_digits[:4], [7, 8, 9])
+    remainder = sum_val % 11
+
+    if remainder == 0:
+        return True
+
+    if remainder == 2 and branch_number in [
+        154, 166, 178, 181, 183, 191, 192, 503, 505, 507, 515, 516, 527, 539]:
+        return True
+
+    sum_val = scalar_product(account_number_digits[:9], [1, 2, 3, 4, 5, 6, 7, 8, 9])
+    remainder = sum_val % 11
+
+    if remainder == 0:
+        return True
+    else:
+        sum_val = scalar_product(account_number_digits[:6], [1, 2, 3, 4, 5, 6])
+        remainder = sum_val % 11
+        return remainder == 0
 
 
 def jerusalem_validator(account_number, branch_number, branch_number_digits) -> bool:
-    # Validation rules for bank of jerusalem
-    pass
+    return True
 
 
 # A dictionary mapping bank numbers to their specific validation functions
 BANK_VALIDATORS = {
     SUPPORTED_BANKS['YAHAV']: yahav_validator,
     SUPPORTED_BANKS['POST']: post_validator,
+    SUPPORTED_BANKS['LEUMI']: leumi_validator,
     SUPPORTED_BANKS['DISCOUNT']: discount_validator,
     SUPPORTED_BANKS['HAPOALIM']: hapoalim_validator,
     SUPPORTED_BANKS['IGUD']: igud_validator,
-    SUPPORTED_BANKS['OTSAR_AHAYAL']: otsar_ahayal_validator,
+    SUPPORTED_BANKS['OTSAR_HAHAYAL']: otsar_hahayal_validator,
+    SUPPORTED_BANKS['MERCANTILE']: discount_validator,
     SUPPORTED_BANKS['ONE_ZERO']: one_zero_validator,
-    SUPPORTED_BANKS['LEUMI']: leumi_validator,
-    SUPPORTED_BANKS['ARAVEI_ISRAELI']: leumi_validator,
     SUPPORTED_BANKS['MIZRAHI_TEFAHOT']: mizrahi_validator,
-    SUPPORTED_BANKS['CITIBANK']: citybank_validator,
+    SUPPORTED_BANKS['CITYBANK']: citybank_validator,
     SUPPORTED_BANKS['HSBC']: hsbc_validator,
     SUPPORTED_BANKS['BEINLEUMI']: beinleumi_validator,
+    SUPPORTED_BANKS['ARAVEI_ISRAELI']: leumi_validator,
+    SUPPORTED_BANKS['MASAD']: masad_validator,
     SUPPORTED_BANKS['POALEI_AGUDAT_ISRAEL']: beinleumi_validator,
     SUPPORTED_BANKS['JERUSALEM']: jerusalem_validator,
 }
-
 
 def convert_to_int(input_value):
     if isinstance(input_value, str):
@@ -235,24 +277,8 @@ def scalar_product(arr1, arr2):
     return sum(a * b for a, b in zip(arr1, arr2))
 
 
-# def scalar_product(arr1, arr2):
-#     product = 0
-#     for i in range(min(len(arr1), len(arr2))):
-#         product += arr1[i] * arr2[i]
-#     return product
-
-
 def number_digits_to_list(num, length):
     return [int(x) for x in str(num).zfill(length)]
-
-
-# def number_digits_to_list(num, length):
-#     digits_array = []
-#     for _ in range(length):
-#         digits_array.append(num % 10)
-#         num = num // 10
-#     return digits_array
-
 
 def is_non_negative_integer(num):
     return isinstance(num, int) and num >= 0
