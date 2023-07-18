@@ -5,57 +5,56 @@ from israel_bank_account_validator import BANK_VALIDATORS, SUPPORTED_BANKS, numb
 
 class TestBankValidators(unittest.TestCase):
     def test_yahav_validator(self):
-        # Account number: 760050, Branch number: 482, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['YAHAV']](482, number_digits_to_list(760050, 6),
-                                                                       number_digits_to_list(482, 3)))
+        # Example from MASAV doc, Account number: 050067, Branch number: 284, should be valid
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['YAHAV']](482, number_digits_to_list(50067, 6),
+                                                                       number_digits_to_list(284, 3)))
 
         # Account number: 760051, Branch number: 482, should be invalid as we changed a digit
         self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['YAHAV']](482, number_digits_to_list(760051, 6),
                                                                         number_digits_to_list(482, 3)))
 
-        # Additional Test Cases
-        # Test with made-up data. You should replace these with real test cases.
-        # Assume these made-up data: Account number: 123456, Branch number: 912, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['YAHAV']](912, number_digits_to_list(123456, 6),
-                                                                       number_digits_to_list(912, 3)))
+        # Account number: 000000, Branch number: 9, should be invalid
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['YAHAV']](9, number_digits_to_list(000000, 6),
+                                                                       number_digits_to_list(9, 3)))
 
-        # Assume these made-up data: Account number: 123457, Branch number: 912, should be invalid
-        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['YAHAV']](912, number_digits_to_list(123457, 6),
-                                                                        number_digits_to_list(912, 3)))
+        # Account number: 050067, Branch number: 000, should be valid
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['YAHAV']](0, number_digits_to_list(50067, 6),
+                                                                        number_digits_to_list(0, 3)))
 
     def test_post_validator(self):
-        # Account number: 9121950, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['POST']](None, number_digits_to_list(9121950, 9)))
+        # Example from MASAV doc, Account number: 059121900, should be valid
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['ISRAEL_POST']](None, number_digits_to_list(59121900, 9), None))
 
-        # Account number: 9121951, should be invalid as we changed a digit
-        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['POST']](None, number_digits_to_list(9121951, 9)))
+        # Account number: 9121951, should be invalid
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['ISRAEL_POST']](None, number_digits_to_list(9121951, 9), None))
 
-        # Additional Test Cases
-        # Test with made-up data. You should replace these with real test cases.
-        # Assume these made-up data: Account number: 123456789, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['POST']](None, number_digits_to_list(123456789, 9)))
-
-        # Assume these made-up data: Account number: 123456788, should be invalid
-        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['POST']](None, number_digits_to_list(123456788, 9)))
+        # Account number: 000000000, should be valid
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['ISRAEL_POST']](None, number_digits_to_list(0, 9), None))
 
     def test_leumi_validator(self):
-        # Account number: 696870, Branch number: 639, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']](639, number_digits_to_list(696870, 8),
-                                                                       number_digits_to_list(639, 3)))
+        # Example from MASAV doc, Account number: 07869660, Branch number: 936, should be valid
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']](936, number_digits_to_list(7869660, 8),
+                                                                  number_digits_to_list(936, 3)))
 
-        # Account number: 696871, Branch number: 639, should be invalid as we changed a digit
-        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']](639, number_digits_to_list(696871, 8),
+        # Account number: 06696871, Branch number: 936, should be invalid as we changed a digit, should be invalid
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']](639, number_digits_to_list(6696871, 8),
                                                                         number_digits_to_list(639, 3)))
 
-        # Additional Test Cases
-        # Test with made-up data. You should replace these with real test cases.
-        # Assume these made-up data: Account number: 12345678, Branch number: 912, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']](912, number_digits_to_list(12345678, 8),
-                                                                       number_digits_to_list(912, 3)))
+        # Account number: 99696203, Branch number: 800, prevent skipping account_type 110, should be valid
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']](800, number_digits_to_list(99696203, 8),
+                                                                       number_digits_to_list(8, 3)))
 
-        # Assume these made-up data: Account number: 12345679, Branch number: 912, should be invalid
-        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']](912, number_digits_to_list(12345679, 8),
+        # Account number: 99696230, Branch number: 801, skipping account_type 110
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']](801, number_digits_to_list(2696230, 8),
+                                                                  number_digits_to_list(8, 3)))
+
+        # Account number: 90054318, Branch number: 912, prevent skipping account_type 110, should be valid
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']](912, number_digits_to_list(81345047, 8),
                                                                         number_digits_to_list(912, 3)))
+
+        # Account number: 00000000, Branch number: 800, prevent skipping account_type 110, should be invalid
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']](800, number_digits_to_list(0, 8),
+                                                                  number_digits_to_list(800, 3)))
 
     def test_discount_validator(self):
         # Account number: 810230000, should be valid
@@ -73,42 +72,42 @@ class TestBankValidators(unittest.TestCase):
         self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['DISCOUNT']](None, number_digits_to_list(123456788, 9)))
 
     def test_hapoalim_validator(self):
-        # Account number: 11140, Branch number: 175, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['HAPOALIM']](175, number_digits_to_list(11140, 5),
-                                                                          number_digits_to_list(175, 3)))
+        # Account number: 041116, Branch number: 571, should be valid
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['HAPOALIM']](571, number_digits_to_list(41116, 6),
+                                                                          number_digits_to_list(571, 3)))
 
         # Account number: 11141, Branch number: 175, should be invalid as we changed a digit
-        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['HAPOALIM']](175, number_digits_to_list(11141, 5),
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['HAPOALIM']](175, number_digits_to_list(11149, 6),
                                                                            number_digits_to_list(175, 3)))
 
-        # Additional Test Cases
-        # Test with made-up data. You should replace these with real test cases.
-        # Assume these made-up data: Account number: 12345, Branch number: 678, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['HAPOALIM']](678, number_digits_to_list(12345, 5),
-                                                                          number_digits_to_list(678, 3)))
+        # Account number: 12345, Branch number: 678, should be valid
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['HAPOALIM']](0, number_digits_to_list(12345, 6),
+                                                                          number_digits_to_list(0, 3)))
 
-        # Assume these made-up data: Account number: 12346, Branch number: 678, should be invalid
-        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['HAPOALIM']](678, number_digits_to_list(12346, 5),
+        # Account number: 000000, Branch number: 678, should be invalid
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['HAPOALIM']](678, number_digits_to_list(0, 6),
                                                                            number_digits_to_list(678, 3)))
 
     def test_igud_validator(self):
-        # Account number: 22001711, branch number: 706, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['IGUD']](number_digits_to_list(706, 3),
-                                                                      number_digits_to_list(22001711, 8)))
+        # Account number: 11710022, branch number: 607, should be valid
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['IGUD']](607, number_digits_to_list(11710022, 8),
+                                                                          number_digits_to_list(607, 3)))
 
         # Account number: 22001712, branch number: 706, should be invalid as we changed a digit
-        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['IGUD']](number_digits_to_list(706, 3),
-                                                                       number_digits_to_list(22001712, 8)))
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['IGUD']](706, number_digits_to_list(22001712, 8),
+                                                                          number_digits_to_list(706, 3)))
 
-        # Additional Test Cases
-        # Test with made-up data. You should replace these with real test cases.
-        # Assume these made-up data: Account number: 12345678, branch number: 123, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['IGUD']](number_digits_to_list(123, 3),
-                                                                      number_digits_to_list(12345678, 8)))
+        # Account number: 00000000, branch number: 000, should be invalid
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['IGUD']](0, number_digits_to_list(0, 8),
+                                                                          number_digits_to_list(0, 3)))
 
-        # Assume these made-up data: Account number: 12345677, branch number: 123, should be invalid
-        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['IGUD']](number_digits_to_list(123, 3),
-                                                                       number_digits_to_list(12345677, 8)))
+        # Account number: 00000000, branch number: 12, should be invalid
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['IGUD']](12, number_digits_to_list(0, 8),
+                                                                          number_digits_to_list(12, 3)))
+
+        # Account number: 11710022, branch number: 000, should be invalid
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['IGUD']](0, number_digits_to_list(11710022, 8),
+                                                                  number_digits_to_list(0, 3)))
 
     def test_otsar_ahayal_validator(self):
         # Account number: 611140, branch number: 175, should be valid
