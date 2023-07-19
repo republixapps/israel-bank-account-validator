@@ -21,7 +21,7 @@ class TestBankValidators(unittest.TestCase):
         self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['YAHAV']](0, number_digits_to_list(50067, 9),
                                                                   number_digits_to_list(0, 3)))
 
-    def test_post_validator(self):
+    def test_israel_post_validator(self):
         # Example from MASAV doc, Account number: 059121900, should be valid
         self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['ISRAEL_POST']](None, number_digits_to_list(59121900, 9), None))
 

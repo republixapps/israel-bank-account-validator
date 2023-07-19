@@ -257,7 +257,6 @@ def jerusalem_validator(account_number, branch_number, branch_number_digits) -> 
     return True
 
 
-# A dictionary mapping bank numbers to their specific validation functions
 BANK_VALIDATORS = {
     SUPPORTED_BANKS['YAHAV']: yahav_validator,
     SUPPORTED_BANKS['ISRAEL_POST']: israel_post_validator,
@@ -277,10 +276,3 @@ BANK_VALIDATORS = {
     SUPPORTED_BANKS['POALEI_AGUDAT_ISRAEL']: beinleumi_validator,
     SUPPORTED_BANKS['JERUSALEM']: jerusalem_validator,
 }
-
-# print(validate_bank_account(12, 345, 67890))
-# print(validate_bank_account(11, 345, 67890))
-# print(validate_bank_account(20, 345, 67890))
-# print(validate_bank_account(10, 345, 67890))
-# print(validate_bank_account(9, 345, 67890))
-# print(validate_bank_account(13, 345, 67890))
