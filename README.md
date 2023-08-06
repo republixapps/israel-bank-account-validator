@@ -23,7 +23,7 @@ To use this library, you can import it and call the validate_bank_account() func
 ```python
 from israel_bank_account_validator import validate_bank_account
 
-isValid = validate_bank_account(bank_code, branch_code, account_number)
+isValid = validate_bank_account(bank_number, bank_branch_number, account_number)
 print(isValid) # prints either True or False
 ```
 
@@ -37,7 +37,7 @@ print(isValid) # prints either True or False
 ```
 
 # Key Functions
-validate_bank_account(bank_code, branch_code, account_number)
+validate_bank_account(bank_number, bank_branch_number, account_number)
 This is the main function, which you can use to validate any Israeli bank account number.
 
 # Example:
@@ -65,7 +65,7 @@ else:
 ```
 
 # Other Validator Functions
-The library also includes individual validator functions for each bank. These functions follow the naming convention validate_bank_code_X where X is the bank code.
+The library also includes individual validator functions for each bank. These functions follow the naming convention validate_bank_number_X where X is the bank code.
 
 # Testing
 To run the tests, you can use Python's built-in unittest module or pytest.

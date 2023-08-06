@@ -51,32 +51,63 @@ def is_non_negative_integer(num):
     return isinstance(num, int) and num >= 0
 
 
+class BankNumberValueError(Exception):
+    def __init__(self, bank_number, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.bank_number = bank_number
+
+
+class BankBranchNumberValueError(Exception):
+    def __init__(self, branch_number, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.branch_number = branch_number
+
+
+class BankAccountNumberValueError(Exception):
+    def __init__(self, account_number, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.account_number = account_number
+
+
+class UnsupportedBankError(Exception):
+    def __init__(self, bank_number, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.bank_number = bank_number
+
+
 def validate_bank_account(bank_number: Union[int, str], branch_number: Union[int, str],
                           account_number: Union[int, str]) -> bool:
     try:
         # Convert to integers if necessary
         bank_number = convert_to_int(bank_number)
+    except ValueError:
+        raise BankNumberValueError("Bank number could not be converted to an integer")
+    try:
         branch_number = convert_to_int(branch_number)
+    except ValueError:
+        raise BankBranchNumberValueError("Branch number could not be converted to an integer")
+    try:
         account_number = convert_to_int(account_number)
     except ValueError:
-        logger.error("One or more inputs could not be converted to an integer")
-        return False
+        raise BankAccountNumberValueError("Account number could not be converted to an integer")
+
+    if not is_non_negative_integer(bank_number):
+        raise BankNumberValueError("Bank number is not a non-negative integer")
 
     # Check if bank is supported
     if bank_number not in SUPPORTED_BANKS.values():
         logger.error("Unsupported bank number")
-        return False
+        raise UnsupportedBankError("Unsupported bank number")
 
-    if not is_non_negative_integer(bank_number) or not is_non_negative_integer(
-            branch_number) or not is_non_negative_integer(account_number):
-        logger.error("One or more inputs are not non-negative integers")
-        return False
+    if not is_non_negative_integer(branch_number):
+        raise BankBranchNumberValueError("Branch number is not a non-negative integer")
+    if not is_non_negative_integer(account_number):
+        raise BankAccountNumberValueError("Account number is not a non-negative integer")
 
     # Get the appropriate validator for the given bank
     validator = BANK_VALIDATORS.get(bank_number)
     if validator is None:
-        logger.error("No validator found for the given bank")
-        return False
+        raise UnsupportedBankError("Unsupported bank number")
 
     account_number_digits = number_digits_to_list(account_number, 9)
     branch_number_digits = number_digits_to_list(branch_number, 3)
