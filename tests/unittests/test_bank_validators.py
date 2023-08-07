@@ -1,5 +1,8 @@
 import unittest
-from israel_bank_account_validator import BANK_VALIDATORS, SUPPORTED_BANKS, number_digits_to_list
+
+from israel_bank_account_validator import BANK_VALIDATORS
+from israel_bank_account_validator import number_digits_to_list
+from israel_bank_account_validator import SUPPORTED_BANKS
 
 
 class TestBankValidators(unittest.TestCase):
@@ -23,13 +26,18 @@ class TestBankValidators(unittest.TestCase):
 
     def test_israel_post_validator(self):
         # Example from MASAV doc, Account number: 059121900, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['ISRAEL_POST']](None, number_digits_to_list(59121900, 9), None))
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['ISRAEL_POST']](None,
+                                                                        number_digits_to_list(59121900, 9),
+                                                                        None))
 
         # Account number: 9121951, should be invalid
-        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['ISRAEL_POST']](None, number_digits_to_list(9121951, 9), None))
+        self.assertFalse(BANK_VALIDATORS[SUPPORTED_BANKS['ISRAEL_POST']](None,
+                                                                         number_digits_to_list(9121951, 9),
+                                                                         None))
 
         # Account number: 000000000, should be valid
-        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['ISRAEL_POST']](None, number_digits_to_list(0, 9), None))
+        self.assertTrue(BANK_VALIDATORS[SUPPORTED_BANKS['ISRAEL_POST']](None,
+                                                                        number_digits_to_list(0, 9), None))
 
     def test_leumi_validator(self):
         bank_validator = BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']]

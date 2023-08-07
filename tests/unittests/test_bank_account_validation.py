@@ -1,6 +1,10 @@
 import unittest
-from israel_bank_account_validator import validate_bank_account, BankNumberValueError, BankBranchNumberValueError, \
-    BankAccountNumberValueError, UnsupportedBankError
+
+from israel_bank_account_validator import BankAccountNumberValueError
+from israel_bank_account_validator import BankBranchNumberValueError
+from israel_bank_account_validator import BankNumberValueError
+from israel_bank_account_validator import UnsupportedBankError
+from israel_bank_account_validator import validate_bank_account
 
 
 class TestBankAccountValidation(unittest.TestCase):
