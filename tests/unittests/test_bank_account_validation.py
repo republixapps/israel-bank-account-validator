@@ -1,4 +1,7 @@
-import unittest
+import json
+
+import allure
+import pytest
 
 from israel_bank_account_validator import BankAccountNumberValueError
 from israel_bank_account_validator import BankBranchNumberValueError
@@ -6,73 +9,35 @@ from israel_bank_account_validator import BankNumberValueError
 from israel_bank_account_validator import UnsupportedBankError
 from israel_bank_account_validator import validate_bank_account
 
+EXCEPTIONS = {
+    "BankNumberValueError": BankNumberValueError,
+    "BankBranchNumberValueError": BankBranchNumberValueError,
+    "BankAccountNumberValueError": BankAccountNumberValueError,
+    "UnsupportedBankError": UnsupportedBankError
+}
 
-class TestBankAccountValidation(unittest.TestCase):
 
-    def test_valid_account(self):
-        bank_number = '11'  # BANK DISCOUNT
-        bank_branch_number = '111'
-        account_number = '000032018'
-        self.assertTrue(validate_bank_account(bank_number, bank_branch_number, account_number))
+def load_test_data():
+    with open('data/test_bank_account_data.json') as f:
+        data = json.load(f)
+    return data['test_cases']
 
-    def test_invalid_account(self):
-        bank_number = '20'  # BANK MIZRAHI TEFAHOT
-        bank_branch_number = '006'
-        account_number = '000160779'
-        self.assertFalse(validate_bank_account(bank_number, bank_branch_number, account_number))
 
-    def test_empty_values(self):
-        bank_number = ''
-        bank_branch_number = '006'
-        account_number = '000160779'
+@allure.story("Validate bank account")
+@allure.feature("Bank account validation")
+@allure.title("Test bank account validation")
+@allure.description("Check bank account validation")
+@pytest.mark.parametrize('test_case', load_test_data())
+def test_bank_account_validation(test_case):
+    bank_number = test_case['bank_number']
+    bank_branch_number = test_case['bank_branch_number']
+    account_number = test_case['account_number']
 
-        with self.assertRaises(BankNumberValueError):
+    expected_result = test_case.get('expected_result')
+    expected_exception = test_case.get('expected_exception')
+
+    if expected_exception:
+        with pytest.raises(EXCEPTIONS[expected_exception]):
             validate_bank_account(bank_number, bank_branch_number, account_number)
-
-        bank_number = '11'
-        bank_branch_number = ''
-        with self.assertRaises(BankBranchNumberValueError):
-            validate_bank_account(bank_number, bank_branch_number, account_number)
-
-        bank_branch_number = '006'
-        account_number = ''
-        with self.assertRaises(BankAccountNumberValueError):
-            self.assertFalse(validate_bank_account(bank_number, bank_branch_number, account_number))
-
-    def test_non_string_input(self):
-        bank_number = 11
-        bank_branch_number = 111
-        account_number = 1111111
-        self.assertFalse(validate_bank_account(bank_number, bank_branch_number, account_number))
-
-    def test_unsupported_bank(self):
-        bank_number = '99999999999'
-        bank_branch_number = '006'
-        account_number = '000160779'
-        with self.assertRaises(UnsupportedBankError):
-            validate_bank_account(bank_number, bank_branch_number, account_number)
-
-    def test_negative_bank_number(self):
-        bank_number = '-1'
-        bank_branch_number = '006'
-        account_number = '000160779'
-        with self.assertRaises(BankNumberValueError):
-            validate_bank_account(bank_number, bank_branch_number, account_number)
-
-    def test_negative_bank_branch_number(self):
-        bank_number = '11'
-        bank_branch_number = '-6'
-        account_number = '000160779'
-        with self.assertRaises(BankBranchNumberValueError):
-            validate_bank_account(bank_number, bank_branch_number, account_number)
-
-    def test_negative_account_number(self):
-        bank_number = '11'
-        bank_branch_number = '006'
-        account_number = '-000160779'
-        with self.assertRaises(BankAccountNumberValueError):
-            validate_bank_account(bank_number, bank_branch_number, account_number)
-
-
-if __name__ == '__main__':
-    unittest.main()
+    else:
+        assert validate_bank_account(bank_number, bank_branch_number, account_number) == expected_result

@@ -56,27 +56,19 @@ def is_positive_integer(num):
 
 
 class BankNumberValueError(Exception):
-    def __init__(self, bank_number, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.bank_number = bank_number
+    pass
 
 
 class BankBranchNumberValueError(Exception):
-    def __init__(self, branch_number, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.branch_number = branch_number
+    pass
 
 
 class BankAccountNumberValueError(Exception):
-    def __init__(self, account_number, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.account_number = account_number
+    pass
 
 
 class UnsupportedBankError(Exception):
-    def __init__(self, bank_number, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.bank_number = bank_number
+    pass
 
 
 def validate_bank_account(bank_number: Union[int, str], branch_number: Union[int, str],
