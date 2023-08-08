@@ -70,7 +70,7 @@ class TestBankValidators(unittest.TestCase):
         # Example from MASAV doc, Account number: 000032018, should be valid
         self.assertTrue(bank_validator(None, number_digits_to_list(32018, 9), None))
 
-        # Account number: 100032018, should be invalid
+        # Account number: 000132018, should be invalid
         self.assertFalse(bank_validator(None, number_digits_to_list(132018, 9), None))
 
     def test_hapoalim_validator(self):
