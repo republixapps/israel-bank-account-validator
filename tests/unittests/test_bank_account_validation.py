@@ -29,15 +29,16 @@ def load_test_data():
 @allure.description("Check bank account validation")
 @pytest.mark.parametrize('test_case', load_test_data())
 def test_bank_account_validation(test_case):
+    description = test_case['description']
     bank_number = test_case['bank_number']
     bank_branch_number = test_case['bank_branch_number']
     account_number = test_case['account_number']
-
     expected_result = test_case.get('expected_result')
     expected_exception = test_case.get('expected_exception')
 
-    if expected_exception:
-        with pytest.raises(EXCEPTIONS[expected_exception]):
-            validate_bank_account(bank_number, bank_branch_number, account_number)
-    else:
-        assert validate_bank_account(bank_number, bank_branch_number, account_number) == expected_result
+    with allure.step(description):
+        if expected_exception:
+            with pytest.raises(EXCEPTIONS[expected_exception]):
+                validate_bank_account(bank_number, bank_branch_number, account_number)
+        else:
+            assert validate_bank_account(bank_number, bank_branch_number, account_number) == expected_result

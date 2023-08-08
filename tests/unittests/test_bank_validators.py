@@ -25,5 +25,6 @@ for name, cases in test_data.items():
 @pytest.mark.parametrize("bank_name, bank_number, account_number, branch_number, account_length, expected", test_cases)
 def test_bank_validators(bank_name, bank_number, account_number, branch_number, account_length, expected):
     bank_validator = BANK_VALIDATORS[SUPPORTED_BANKS[bank_name]]
-    assert bank_validator(bank_number, number_digits_to_list(account_number, account_length),
-                          number_digits_to_list(branch_number, 3)) == expected
+    with allure.step(f"Validate bank account for {bank_name}"):
+        assert bank_validator(bank_number, number_digits_to_list(account_number, account_length),
+                              number_digits_to_list(branch_number, 3)) == expected
