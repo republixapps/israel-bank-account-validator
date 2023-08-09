@@ -1,0 +1,263 @@
+{
+  "YAHAV": [
+    {
+      "bank_number": 482,
+      "account_number": 50067,
+      "branch_number": 284,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 482,
+      "account_number": 760051,
+      "branch_number": 482,
+      "account_length": 9,
+      "expected": false
+    },
+    {
+      "bank_number": 9,
+      "account_number": 0,
+      "branch_number": 9,
+      "account_length": 9,
+      "expected": false
+    },
+    {
+      "bank_number": 0,
+      "account_number": 50067,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    }
+  ],
+  "ISRAEL_POST": [
+    {
+      "bank_number": 0,
+      "account_number": 59121900,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 0,
+      "account_number": 9121951,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": false
+    },
+    {
+      "bank_number": 0,
+      "account_number": 0,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    }
+  ],
+  "LEUMI": [
+    {
+      "bank_number": 936,
+      "account_number": 7869660,
+      "branch_number": 936,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 639,
+      "account_number": 6696871,
+      "branch_number": 639,
+      "account_length": 9,
+      "expected": false
+    }
+  ],
+    "DISCOUNT": [
+    {
+      "bank_number": 0,
+      "account_number": 32018,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 0,
+      "account_number": 132018,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": false
+    }
+  ],
+  "MERCANTILE": [
+    {
+      "bank_number": 0,
+      "account_number": 32018,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 0,
+      "account_number": 132018,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": false
+    }
+  ],
+  "HAPOALIM": [
+    {
+      "bank_number": 571,
+      "account_number": 41116,
+      "branch_number": 571,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 175,
+      "account_number": 11143,
+      "branch_number": 175,
+      "account_length": 9,
+      "expected": true
+    }
+  ],
+  "IGUD": [
+    {
+      "bank_number": 607,
+      "account_number": 11710022,
+      "branch_number": 607,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 706,
+      "account_number": 22001711,
+      "branch_number": 706,
+      "account_length": 9,
+      "expected": true
+    }
+  ],
+  "OTSAR_HAHAYAL": [
+    {
+      "bank_number": 571,
+      "account_number": 41116,
+      "branch_number": 571,
+      "account_length": 6,
+      "expected": true
+    },
+    {
+      "bank_number": 571,
+      "account_number": 141116,
+      "branch_number": 571,
+      "account_length": 6,
+      "expected": false
+    }
+  ],
+  "ONE_ZERO": [
+    {
+      "bank_number": 0,
+      "account_number": 123456771,
+      "branch_number": 1,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 0,
+      "account_number": 123456772,
+      "branch_number": 1,
+      "account_length": 9,
+      "expected": false
+    }
+  ],
+  "MIZRAHI_TEFAHOT": [
+    {
+      "bank_number": 6,
+      "account_number": 160778,
+      "branch_number": 6,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 106,
+      "account_number": 160771,
+      "branch_number": 106,
+      "account_length": 9,
+      "expected": true
+    }
+  ],
+  "CITYBANK": [
+    {
+      "bank_number": 0,
+      "account_number": 700241017,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 0,
+      "account_number": 700241317,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": false
+    }
+  ],
+  "HSBC": [
+    {
+      "bank_number": 101,
+      "account_number": 123456489,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 101,
+      "account_number": 123356789,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": false
+    }
+  ],
+  "BEINLEUMI": [
+    {
+      "bank_number": 0,
+      "account_number": 32018,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 0,
+      "account_number": 132018,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    }
+  ],
+  "MASAD": [
+    {
+      "bank_number": 571,
+      "account_number": 41116,
+      "branch_number": 571,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 505,
+      "account_number": 241110,
+      "branch_number": 505,
+      "account_length": 9,
+      "expected": true
+    }
+  ],
+  "JERUSALEM": [
+    {
+      "bank_number": 0,
+      "account_number": 123456789,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 0,
+      "account_number": 987654321,
+      "branch_number": 0,
+      "account_length": 9,
+      "expected": true
+    }
+  ]
+}
