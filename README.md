@@ -1,30 +1,60 @@
 # Israel Bank Account Validator
-
-This Python library is a copy of the original JavaScript library found at [il-bank-account-validator](https://github.com/soryy708/il-bank-account-validator). The initial conversion was performed by an AI model (chatGPT), with subsequent refactoring and reorganization carried out to enhance the functionality and usability of the library.
-
-This library is designed in accordance with the MASAV Bank account validation rules, which can be found in the [following documentation](https://masav.co.il/media/2473/bdikat_hukiot_heshbon.pdf) (last updated on 04/04/2022). It supports all the banks in Israel that comply with the MASAV guidelines.
+Based on the MASAV bank account validation documentation (available [here](https://www.masav.co.il/media/2473/bdikat_hukiot_heshbon.pdf)), this package provides functions and classes to validate Israeli bank account numbers for supported banks.
 
 ## Features
+Validates bank account numbers for various supported Israeli banks.
+Provides detailed logging for easy debugging.
+Supports multiple data types (integers or strings) for input.
+Offers specific exceptions for different error scenarios.
+Supported Banks
+Currently, the supported banks are:
 
-- A comprehensive `validate_bank_account()` function
-- Individual validators for each bank
-- Utility functions to assist in bank account validation
++ YAHAV
++ ISRAEL_POST
++ LEUMI
++ DISCOUNT
++ HAPOALIM
++ IGUD
++ OTSAR_HAHAYAL
++ MERCANTILE
++ ONE_ZERO
++ MIZRAHI_TEFAHOT
++ CITYBANK
++ HSBC
++ BEINLEUMI
++ ARAVEI_ISRAELI
++ MASAD
++ POALEI_AGUDAT_ISRAEL
++ JERUSALEM
 
 ## Installation
-
-To install this library, you can use pip:
+You can install this package using pip:
 
 ```bash
 pip install israel-bank-account-validator
 ```
 
 # Usage
-To use this library, you can import it and call the validate_bank_account() function:
-```python
-from israel_bank_account_validator import validate_bank_account
+Import the required functions and classes and use the validate_bank_account function:
 
-isValid = validate_bank_account(bank_number, bank_branch_number, account_number)
-print(isValid) # prints either True or False
+```python
+from bank_validations import validate_bank_account
+from bank_validations import InvalidBankAccount, ValidBankAccount
+
+try:
+    bank_code = "012"
+    branch_code = "345"
+    account_number = "67890"
+    validate_bank_account(bank_code, branch_code, account_number)
+
+except KeyError:
+    print("Bank code or branch code not found in database.")
+except InvalidBankAccount:
+    print("Bank account is invalid.")
+except ValidBankAccount:
+    print("Bank account is valid.")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
 ```
 
 You can also call individual bank validators:
@@ -36,71 +66,35 @@ isValid = leumi_validator(branch_number, account_to_digits, branch_to_digits)
 print(isValid) # prints either True or False
 ```
 
-# Key Functions
-validate_bank_account(bank_number, bank_branch_number, account_number)
-This is the main function, which you can use to validate any Israeli bank account number.
+# Running Tests
+This package comes with two test suites:
 
-# Example:
-```python
-from israel_bank_account_validator import validate_bank_account
++ test_bank_validators.py - Tests the validation logic for each individual bank.
++ test_bank_account_validation.py - Tests the overall account validation function.
+To run the tests, ensure you have pytest installed:
 
-if validate_bank_account('11', '111', '1111111'):
-    print("The bank account number is valid.")
-else:
-    print("The bank account number is invalid.")
-```
-
-You can also call individual bank validators:
-```python
-from israel_bank_account_validator import leumi_validator, number_digits_to_list
-branch_number = 936
-account_number = 7869660
-account_to_digits = number_digits_to_list(7869660, 9)  # 07869660
-branch_to_digits = number_digits_to_list(936, 3)
-
-if leumi_validator(branch_number, account_to_digits, branch_to_digits):
-    print("The bank account number is valid.")
-else:
-    print("The bank account number is invalid.")
-```
-
-# Other Validator Functions
-The library also includes individual validator functions for each bank. These functions follow the naming convention validate_bank_number_X where X is the bank code.
-
-# Testing
-To run the tests, you can use Python's built-in unittest module or pytest.
-
-# Using Unittest
-Navigate to the directory containing the tests and run the unittest module:
-```shell
-python -m unittest
-```
-
-To run a specific test module:
-```shell
-python -m unittest tests.test_module
-```
-
-And to run a specific test within a module:
-```shell
-python -m unittest tests.test_module.TestClass.test_method
-```
-
-Using Pytest
-If you prefer, you can use pytest to run the tests. Install it with pip:
-```shell
+To run the tests, ensure you have pytest installed:
+```bash
 pip install pytest
 ```
 
-To run a specific test file:
-```shell
-pytest -v tests/unittests/test_bank_validators.py
-```
+Then run the tests using the following:
 
-And to run a specific test within a module:
-```shell
-pytest -v tests/unittests/test_bank_validators.py::TestBankValidators::test_yahav_validator
-```
+```bash
+pytest test_bank_validators.py
+pytest test_bank_account_validation.py
+````
+Test cases are sourced from JSON files, ensuring easy maintenance and expansion.
++ test_bank_account_data.json - Contains test cases for the overall account validation function.
++ test_bank_validators_data.json - Contains test cases for each individual bank validation function.
+
+## Error Handling
+The package provides specific exceptions for various error scenarios:
+
++ BankNumberValueError: Raised when the bank number is invalid.
++ BankBranchNumberValueError: Raised when the branch number is invalid.
++ BankAccountNumberValueError: Raised when the account number is invalid.
++ UnsupportedBankError: Raised when the provided bank is not supported.
 
 # License
 This library is licensed under the MIT License.
