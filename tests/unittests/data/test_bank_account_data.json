@@ -1,0 +1,74 @@
+{
+  "test_cases": [
+    {
+      "description": "Valid Account",
+      "bank_number": "11",
+      "bank_branch_number": "111",
+      "account_number": "000032018",
+      "expected_result": true
+    },
+    {
+      "description": "Invalid Account",
+      "bank_number": "20",
+      "bank_branch_number": "006",
+      "account_number": "000160779",
+      "expected_result": false
+    },
+    {
+      "description": "Empty Bank Number",
+      "bank_number": "",
+      "bank_branch_number": "006",
+      "account_number": "000160779",
+      "expected_exception": "BankNumberValueError"
+    },
+    {
+      "description": "Empty Bank Branch Number",
+      "bank_number": "11",
+      "bank_branch_number": "",
+      "account_number": "000160779",
+      "expected_exception": "BankBranchNumberValueError"
+    },
+    {
+      "description": "Empty Account Number",
+      "bank_number": "11",
+      "bank_branch_number": "006",
+      "account_number": "",
+      "expected_exception": "BankAccountNumberValueError"
+    },
+    {
+      "description": "Non-String Input",
+      "bank_number": 11,
+      "bank_branch_number": 111,
+      "account_number": 1111111,
+      "expected_result": false
+    },
+    {
+      "description": "Unsupported Bank",
+      "bank_number": "99999999999",
+      "bank_branch_number": "006",
+      "account_number": "000160779",
+      "expected_exception": "UnsupportedBankError"
+    },
+    {
+      "description": "Negative Bank Number",
+      "bank_number": "-1",
+      "bank_branch_number": "006",
+      "account_number": "000160779",
+      "expected_exception": "BankNumberValueError"
+    },
+    {
+      "description": "Negative Bank Branch Number",
+      "bank_number": "11",
+      "bank_branch_number": "-6",
+      "account_number": "000160779",
+      "expected_exception": "BankBranchNumberValueError"
+    },
+    {
+      "description": "Negative Account Number",
+      "bank_number": "11",
+      "bank_branch_number": "006",
+      "account_number": "-000160779",
+      "expected_exception": "BankAccountNumberValueError"
+    }
+  ]
+}
