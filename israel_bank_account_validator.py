@@ -30,7 +30,7 @@ MIZRAHI_TEFAHOT_BRANCH_THRESHOLD = 400
 MIZRAHI_TEFAHOT_BRANCH_THRESHOLD_MIN = 401
 MIZRAHI_TEFAHOT_BRANCH_THRESHOLD_MAX = 799
 
-LEUUMI_BRANCH_THRESHOLD = 800
+LEUUMI_BRANCH_THRESHOLD_LIST = [800, 864]
 
 
 def convert_to_int(input_value):
@@ -148,7 +148,7 @@ def igud_validator(branch_number, account_number_digits, branch_number_digits) -
 
 
 def otsar_hahayal_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
-    sum_val = scalar_product(account_number_digits[:6], [6, 5, 4, 3, 2, 1])
+    sum_val = scalar_product(account_number_digits[3:], [6, 5, 4, 3, 2, 1])
     sum_val += scalar_product(branch_number_digits[:4], [9, 8, 7])
     remainder = sum_val % 11
 
@@ -187,8 +187,8 @@ def leumi_validator(branch_number, account_number_digits, branch_number_digits) 
 
     is_skip_110_account_type = False
     account_number_digits_threshold = account_number_digits[7] + account_number_digits[6] * 10
-    if branch_number == LEUUMI_BRANCH_THRESHOLD and account_number_digits_threshold not in [20, 23, 0] or \
-            branch_number != LEUUMI_BRANCH_THRESHOLD and account_number_digits_threshold != 0:
+    if branch_number in LEUUMI_BRANCH_THRESHOLD_LIST and account_number_digits_threshold not in [20, 23, 0] or \
+            branch_number not in LEUUMI_BRANCH_THRESHOLD_LIST and account_number_digits_threshold != 0:
         is_skip_110_account_type = True
 
     # Step 2: Add each account type to the total and check against the control digits
@@ -234,18 +234,8 @@ def citybank_validator(branch_number, account_number_digits, branch_number_digit
 
 
 def hsbc_validator(branch_number, account_number_digit, branch_number_digits) -> bool:
-    if branch_number == 101:
-        # The seventh digit from the left should be 4
-        if account_number_digit[3] != 4:
-            return False
-
-    elif branch_number == 102:
-        # There is only one valid account number: 001
-        if account_number_digit[-3:] != [0, 0, 1]:
-            return False
-
-    # If no rules were broken, the account number is valid
-    return True
+    return (branch_number == 101 and account_number_digit[6] == 4 or branch_number == 102
+            and account_number_digit[-3:] == [0, 0, 1])
 
 
 def beinleumi_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
