@@ -163,6 +163,11 @@ def otsar_hahayal_validator(branch_number, account_number_digits, branch_number_
 
 
 def one_zero_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
+    if branch_number == 0:
+        branch_number = 1
+    if branch_number_digits[-1] == 0:
+        branch_number_digits[-1] = 1
+
     # Combine the digits into a single number
     check_number = int(''.join(map(str, branch_number_digits + account_number_digits[:-2])))
 
