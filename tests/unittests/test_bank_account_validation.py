@@ -42,3 +42,12 @@ def test_bank_account_validation(test_case):
                 validate_bank_account(bank_number, bank_branch_number, account_number)
         else:
             assert validate_bank_account(bank_number, bank_branch_number, account_number) == expected_result
+
+
+def test_one_zerro():
+    from israel_bank_account_validator import validate_bank_account
+
+    assert validate_bank_account('18', '0', '203865813')
+    assert validate_bank_account('18', '001', '203865813')
+    assert validate_bank_account('18', '0', '123456771')
+    assert validate_bank_account('18', '001', '123456771')
