@@ -50,21 +50,19 @@ def test_validate_liumi():
             "bank_number": 10,
             "account_number": 19270053,
             "branch_number": 906,
-            "account_length": 9
         },
         {
             "bank_number": 10,
             "account_number": 13590072,
             "branch_number": 842,
-            "account_length": 9
         }
     ]
 
     for i in liumi:
-        number1 = number_digits_to_list(i["account_number"], i["account_length"])
-        number2 = number_digits_to_list(i.get('branch_number'), 3)
+        account = number_digits_to_list(i["account_number"], 9)
+        branch = number_digits_to_list(i['branch_number'], 3)
 
-        res = bank_validator(i["bank_number"], number1, number2)
-        print(res)
+        res = bank_validator(i["bank_number"], account, branch)
+        print(account, branch, i["account_number"], res)
 
     assert 0

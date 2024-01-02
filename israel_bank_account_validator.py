@@ -174,39 +174,46 @@ def one_zero_validator(branch_number, account_number_digits, branch_number_digit
 
 
 def leumi_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
-    # Account types
-    account_types = [110, 128, 180, 330, 340]
+    FIRST_SIX_DIGITS = 7
+    FIFTH_DIGIT = 4
+    SIXTS_DIGIT = 5
 
-    # Multipliers for branch and account number digits
+    account_types = [110, 128, 180, 330, 340]
     account_multipliers = [7, 6, 5, 4, 3, 2]
     branch_multipliers = [10, 9, 8]
 
-    # Step 1: Multiply digits by their respective multipliers and add the products together
-    total = scalar_product(account_number_digits[1:7], account_multipliers)
-    total += scalar_product(branch_number_digits[:4], branch_multipliers)
+    total = \
+        scalar_product(account_number_digits[:FIRST_SIX_DIGITS], account_multipliers) + \
+        scalar_product(branch_number_digits, branch_multipliers)
 
     is_skip_110_account_type = False
-    account_number_digits_threshold = account_number_digits[7] + account_number_digits[6] * 10
-    if branch_number == LEUUMI_BRANCH_THRESHOLD and account_number_digits_threshold not in [20, 23, 0] or \
-            branch_number != LEUUMI_BRANCH_THRESHOLD and account_number_digits_threshold != 0:
+    account_number_digits_threshold = ''.join([
+        str(account_number_digits[FIFTH_DIGIT]),
+        str(account_number_digits[SIXTS_DIGIT])
+    ])
+
+    if any([
+        (account_number_digits_threshold not in ('20', '23', '00') and branch_number in (800, 864)),
+        (account_number_digits_threshold not in ('00', ) and branch_number not in (800, 864)),  # test this 00
+    ]):
         is_skip_110_account_type = True
 
-    # Step 2: Add each account type to the total and check against the control digits
-    control_digits = account_number_digits[7:9]
+    
+    control_digits = account_number_digits[-2:]
     for account_type in account_types:
-        # Skip account type 110 if the 5th and 6th digits do not match certain criteria
+        
         if account_type == 110 and is_skip_110_account_type:
             continue
         check_total = total + account_type
-        # Step 3: Calculate the difference between 100 and the last two digits of check_total
+        
         last_two_digits = check_total % 100
         check_digits_value = 100 - last_two_digits if last_two_digits != 0 else last_two_digits
         check_digits = [check_digits_value // 10, check_digits_value % 10]
-        # If the check digits match the control digits, the account number is valid
+        
         if check_digits == control_digits:
             return True
 
-    # If none of the account types produce a match, the account number is not valid
+
     return False
 
 
@@ -303,3 +310,26 @@ BANK_VALIDATORS = {
     SUPPORTED_BANKS['POALEI_AGUDAT_ISRAEL']: beinleumi_validator,
     SUPPORTED_BANKS['JERUSALEM']: jerusalem_validator,
 }
+
+
+if __name__ == '__main__':
+    liumi = [
+        {
+            "bank_number": 10,
+            "account_number": 19270053,
+            "branch_number": 906,
+        },
+        {
+            "bank_number": 10,
+            "account_number": 13590072,
+            "branch_number": 842,
+        }
+    ]
+
+    for i in liumi:
+        account = number_digits_to_list(i["account_number"], 9)
+        branch = number_digits_to_list(i['branch_number'], 3)
+
+        res = leumi_validator(i["branch_number"], account, branch)
+
+        print(account, branch, i["account_number"], res)
