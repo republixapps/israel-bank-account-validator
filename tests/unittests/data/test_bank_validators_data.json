@@ -54,17 +54,24 @@
   ],
   "LEUMI": [
     {
-      "bank_number": 936,
+      "bank_number": 10,
       "account_number": 7869660,
       "branch_number": 936,
-      "account_length": 9,
+      "account_length": 8,
       "expected": true
     },
     {
-      "bank_number": 639,
+      "bank_number": 10,
+      "account_number": 19270053,
+      "branch_number": 906,
+      "account_length": 8,
+      "expected": true
+    },
+    {
+      "bank_number": 10,
       "account_number": 6696871,
       "branch_number": 639,
-      "account_length": 9,
+      "account_length": 8,
       "expected": false
     }
   ],
@@ -198,16 +205,16 @@
   ],
   "HSBC": [
     {
-      "bank_number": 101,
+      "bank_number": 23,
       "account_number": 123456489,
       "branch_number": 0,
       "account_length": 9,
       "expected": true
     },
     {
-      "bank_number": 101,
-      "account_number": 123356789,
-      "branch_number": 0,
+      "bank_number": 23,
+      "account_number": 123256489,
+      "branch_number": 101,
       "account_length": 9,
       "expected": false
     }
