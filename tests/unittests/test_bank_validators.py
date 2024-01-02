@@ -9,12 +9,6 @@ from israel_bank_account_validator import number_digits_to_list
 from israel_bank_account_validator import SUPPORTED_BANKS
 
 
-# @pytest.fixture()
-# def data():
-#     file_ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'test_bank_validators_data.json')
-#     with open(file_) as f:
-#         return json.load(f)
-
 def load_data():
     file_ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'test_bank_validators_data.json')
     with open(file_) as f:
@@ -37,26 +31,31 @@ TEST_DATA = load_data()
 @pytest.mark.parametrize("bank_name, bank_number, account_number, branch_number, account_length, expected", TEST_DATA)
 def test_bank_validators(bank_name, bank_number, account_number, branch_number, account_length, expected):
     bank_validator = BANK_VALIDATORS[SUPPORTED_BANKS[bank_name]]
+
     with allure.step(f"Validate bank account for {bank_name}"):
-        assert bank_validator(bank_number, number_digits_to_list(account_number, account_length),
-                              number_digits_to_list(branch_number, 3)) == expected
+        validated = bank_validator(
+            bank_number,
+            number_digits_to_list(account_number, account_length),
+            number_digits_to_list(branch_number, 3)
+        )
+        assert validated == expected
 
 
-def test_validate_liumi(data):
+def test_validate_liumi():
 
     bank_validator = BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']]
 
     liumi = [
         {
             "bank_number": 10,
-            "account_number": 7869660,
-            "branch_number": 936,
+            "account_number": 19270053,
+            "branch_number": 906,
             "account_length": 9
         },
         {
             "bank_number": 10,
-            "account_number": 6696871,
-            "branch_number": 639,
+            "account_number": 13590072,
+            "branch_number": 842,
             "account_length": 9
         }
     ]
