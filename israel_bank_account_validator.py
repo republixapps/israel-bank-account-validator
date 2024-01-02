@@ -211,7 +211,7 @@ def leumi_validator(branch_number, account_number_digits, branch_number_digits) 
     return False
     """
 
-    FIRST_SIX_DIGITS = 7
+    FIRST_SIX_DIGITS = 6
     FIFTH_DIGIT = 4
     SIXTS_DIGIT = 5
 
@@ -243,18 +243,18 @@ def leumi_validator(branch_number, account_number_digits, branch_number_digits) 
             continue
 
         check_number = (total + account_type) % 100
+
         ones = check_number % 10
         tenth = int((check_number - ones) / 10) if (check_number - ones) > 10 else 0
-
         if all([
             ones == 0,
             tenth == 0,
         ]):
             res.append(control_digits == '00')
 
-        val = str(100 - (tenth + ones))
+        val = str(100 - check_number)
         res.append(control_digits == val)
-    
+
     return any(res)
 
 
@@ -360,17 +360,20 @@ if __name__ == '__main__':
             "account_number": 19270053,
             "branch_number": 906,
         },
-        {
-            "bank_number": 10,
-            "account_number": 13590072,
-            "branch_number": 842,
-        }
+        # {
+        #     "bank_number": 10,
+        #     "account_number": 13590072,
+        #     "branch_number": 842,
+        # }
     ]
 
     for i in liumi:
-        account = number_digits_to_list(i["account_number"], 9)
+        account = number_digits_to_list(i["account_number"], 8)
         branch = number_digits_to_list(i['branch_number'], 3)
 
         res = leumi_validator(i["branch_number"], account, branch)
 
         print(account, branch, i["account_number"], res)
+
+
+
