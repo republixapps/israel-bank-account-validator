@@ -174,43 +174,6 @@ def one_zero_validator(branch_number, account_number_digits, branch_number_digit
 
 
 def leumi_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
-    """
-    # Account types
-    account_types = [110, 128, 180, 330, 340]
-
-    # Multipliers for branch and account number digits
-    account_multipliers = [7, 6, 5, 4, 3, 2]
-    branch_multipliers = [10, 9, 8]
-
-    # Step 1: Multiply digits by their respective multipliers and add the products together
-    total = scalar_product(account_number_digits[1:7], account_multipliers)
-    total += scalar_product(branch_number_digits[:4], branch_multipliers)
-
-    is_skip_110_account_type = False
-    account_number_digits_threshold = account_number_digits[7] + account_number_digits[6] * 10
-    if branch_number == LEUUMI_BRANCH_THRESHOLD and account_number_digits_threshold not in [20, 23, 0] or \
-            branch_number != LEUUMI_BRANCH_THRESHOLD and account_number_digits_threshold != 0:
-        is_skip_110_account_type = True
-
-    # Step 2: Add each account type to the total and check against the control digits
-    control_digits = account_number_digits[7:9]
-    for account_type in account_types:
-        # Skip account type 110 if the 5th and 6th digits do not match certain criteria
-        if account_type == 110 and is_skip_110_account_type:
-            continue
-        check_total = total + account_type
-        # Step 3: Calculate the difference between 100 and the last two digits of check_total
-        last_two_digits = check_total % 100
-        check_digits_value = 100 - last_two_digits if last_two_digits != 0 else last_two_digits
-        check_digits = [check_digits_value // 10, check_digits_value % 10]
-        # If the check digits match the control digits, the account number is valid
-        if check_digits == control_digits:
-            return True
-
-    # If none of the account types produce a match, the account number is not valid
-    return False
-    """
-
     FIRST_SIX_DIGITS = 6
     FIFTH_DIGIT = 4
     SIXTS_DIGIT = 5
@@ -360,11 +323,11 @@ if __name__ == '__main__':
             "account_number": 19270053,
             "branch_number": 906,
         },
-        # {
-        #     "bank_number": 10,
-        #     "account_number": 13590072,
-        #     "branch_number": 842,
-        # }
+        {
+            "bank_number": 10,
+            "account_number": 13590072,
+            "branch_number": 842,
+        }
     ]
 
     for i in liumi:
