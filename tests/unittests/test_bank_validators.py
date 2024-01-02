@@ -39,30 +39,3 @@ def test_bank_validators(bank_name, bank_number, account_number, branch_number, 
             number_digits_to_list(branch_number, 3)
         )
         assert validated == expected
-
-
-def test_validate_liumi():
-
-    bank_validator = BANK_VALIDATORS[SUPPORTED_BANKS['LEUMI']]
-
-    liumi = [
-        {
-            "bank_number": 10,
-            "account_number": 19270053,
-            "branch_number": 906,
-        },
-        {
-            "bank_number": 10,
-            "account_number": 13590072,
-            "branch_number": 842,
-        }
-    ]
-
-    for i in liumi:
-        account = number_digits_to_list(i["account_number"], 9)
-        branch = number_digits_to_list(i['branch_number'], 3)
-
-        res = bank_validator(i["bank_number"], account, branch)
-        print(account, branch, i["account_number"], res)
-
-    assert 0
