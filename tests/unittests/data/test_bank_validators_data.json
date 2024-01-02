@@ -206,8 +206,8 @@
     },
     {
       "bank_number": 23,
-      "account_number": 123356789,
-      "branch_number": 0,
+      "account_number": 123256489,
+      "branch_number": 101,
       "account_length": 9,
       "expected": false
     }
