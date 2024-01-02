@@ -314,29 +314,3 @@ BANK_VALIDATORS = {
     SUPPORTED_BANKS['POALEI_AGUDAT_ISRAEL']: beinleumi_validator,
     SUPPORTED_BANKS['JERUSALEM']: jerusalem_validator,
 }
-
-
-if __name__ == '__main__':
-    liumi = [
-        {
-            "bank_number": 10,
-            "account_number": 19270053,
-            "branch_number": 906,
-        },
-        {
-            "bank_number": 10,
-            "account_number": 13590072,
-            "branch_number": 842,
-        }
-    ]
-
-    for i in liumi:
-        account = number_digits_to_list(i["account_number"], 8)
-        branch = number_digits_to_list(i['branch_number'], 3)
-
-        res = leumi_validator(i["branch_number"], account, branch)
-
-        print(account, branch, i["account_number"], res)
-
-
-
