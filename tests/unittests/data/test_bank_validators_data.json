@@ -62,6 +62,13 @@
     },
     {
       "bank_number": 10,
+      "account_number": 19270053,
+      "branch_number": 906,
+      "account_length": 8,
+      "expected": true
+    },
+    {
+      "bank_number": 10,
       "account_number": 6696871,
       "branch_number": 639,
       "account_length": 8,
