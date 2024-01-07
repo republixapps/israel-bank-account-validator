@@ -186,6 +186,7 @@ def leumi_validator(branch_number, account_number_digits, branch_number_digits) 
     FIFTH_DIGIT = 4
     SIXTS_DIGIT = 5
 
+
     account_types = [110, 128, 180, 330, 340]
     account_multipliers = [7, 6, 5, 4, 3, 2]
     branch_multipliers = [10, 9, 8]
