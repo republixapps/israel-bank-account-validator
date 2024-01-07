@@ -71,8 +71,13 @@ class UnsupportedBankError(Exception):
     pass
 
 
-def validate_bank_account(bank_number: Union[int, str], branch_number: Union[int, str],
-                          account_number: Union[int, str]) -> bool:
+
+
+def validate_bank_account(
+        bank_number: Union[int, str], 
+        branch_number: Union[int, str],
+        account_number: Union[int, str]
+) -> bool:
     try:
         # Convert to integers if necessary
         bank_number = convert_to_int(bank_number)
@@ -174,6 +179,9 @@ def one_zero_validator(branch_number, account_number_digits, branch_number_digit
 
 
 def leumi_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
+    if account_number_digits[0] == 0:
+        account_number_digits.pop(0)
+
     FIRST_SIX_DIGITS = 6
     FIFTH_DIGIT = 4
     SIXTS_DIGIT = 5
