@@ -1,10 +1,304 @@
 {
   "test_cases": [
     {
-      "description": "Valid Account",
+      "description": "Valid Account - YAHAV",
+      "bank_number": "4",
+      "bank_branch_number": "284",
+      "account_number": "050067",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - YAHAV",
+      "bank_number": "4",
+      "bank_branch_number": "284",
+      "account_number": "760050",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - ISRAEL_POST",
+      "bank_number": "09",
+      "bank_branch_number": "0",
+      "account_number": "009121950",
+      "expected_result": true
+    },
+    {
+      "description": "Valid Account - ISRAEL_POST",
+      "bank_number": "09",
+      "bank_branch_number": "0",
+      "account_number": "009121951",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - LEUMI",
+      "bank_number": "10",
+      "bank_branch_number": "936",
+      "account_number": "07869660",
+      "expected_result": true
+    },
+    {
+      "description": "Valid Account - LEUMI",
+      "bank_number": "10",
+      "bank_branch_number": "800",
+      "account_number": "07869660",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - LEUMI",
+      "bank_number": "10",
+      "bank_branch_number": "846",
+      "account_number": "07869660",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - LEUMI",
+      "bank_number": "10",
+      "bank_branch_number": "846",
+      "account_number": "07866660",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - LEUMI",
+      "bank_number": "10",
+      "bank_branch_number": "936",
+      "account_number": "06696870",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - DISCOUNT",
       "bank_number": "11",
-      "bank_branch_number": "111",
+      "bank_branch_number": "0",
       "account_number": "000032018",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - DISCOUNT",
+      "bank_number": "11",
+      "bank_branch_number": "0",
+      "account_number": "810230000",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - HAPOALIM",
+      "bank_number": "12",
+      "bank_branch_number": "571",
+      "account_number": "041116",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - HAPOALIM",
+      "bank_number": "12",
+      "bank_branch_number": "571",
+      "account_number": "611140",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - IGUD",
+      "bank_number": "13",
+      "bank_branch_number": "607",
+      "account_number": "22001711",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - IGUD",
+      "bank_number": "13",
+      "bank_branch_number": "607",
+      "account_number": "22001712",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - OTSAR_HAHAYAL",
+      "bank_number": "14",
+      "bank_branch_number": "571",
+      "account_number": "041116",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - OTSAR_HAHAYAL",
+      "bank_number": "14",
+      "bank_branch_number": "571",
+      "account_number": "611140",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - MERCANTILE",
+      "bank_number": "17",
+      "bank_branch_number": "0",
+      "account_number": "000032018",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - MERCANTILE",
+      "bank_number": "17",
+      "bank_branch_number": "0",
+      "account_number": "810230000",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - ONE_ZERO",
+      "bank_number": "18",
+      "bank_branch_number": "001",
+      "account_number": "123456771",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - ONE_ZERO",
+      "bank_number": "18",
+      "bank_branch_number": "001",
+      "account_number": "123456772",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - ONE_ZERO",
+      "bank_number": "18",
+      "bank_branch_number": "002",
+      "account_number": "765432189",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - ONE_ZERO",
+      "bank_number": "18",
+      "bank_branch_number": "002",
+      "account_number": "765432172",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - MIZRAHI_TEFAHOT",
+      "bank_number": "20",
+      "bank_branch_number": "406",
+      "account_number": "160778",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - MIZRAHI_TEFAHOT",
+      "bank_number": "20",
+      "bank_branch_number": "406",
+      "account_number": "877061",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - CITYBANK",
+      "bank_number": "22",
+      "bank_branch_number": "0",
+      "account_number": "700241017",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - CITYBANK",
+      "bank_number": "22",
+      "bank_branch_number": "0",
+      "account_number": "710142007",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "101",
+      "account_number": "123456489",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "101",
+      "account_number": "123456789",
+      "expected_result": false
+    },
+    {
+      "description": "InValid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "101",
+      "account_number": "1456756",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "101",
+      "account_number": "145675488",
+      "expected_result": true
+    },
+    {
+      "description": "Valid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "103",
+      "account_number": "123456789",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "101",
+      "account_number": "12345648",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - BEINLEUMI",
+      "bank_number": "31",
+      "bank_branch_number": "0",
+      "account_number": "000032018",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - BEINLEUMI",
+      "bank_number": "31",
+      "bank_branch_number": "0",
+      "account_number": "810230000",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - ARAVEI_ISRAELI",
+      "bank_number": "34",
+      "bank_branch_number": "936",
+      "account_number": "07869660",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - ARAVEI_ISRAELI",
+      "bank_number": "34",
+      "bank_branch_number": "936",
+      "account_number": "06696870",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - MASAD",
+      "bank_number": "46",
+      "bank_branch_number": "571",
+      "account_number": "041116",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - MASAD",
+      "bank_number": "46",
+      "bank_branch_number": "571",
+      "account_number": "611140",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - POALEI_AGUDAT_ISRAEL",
+      "bank_number": "52",
+      "bank_branch_number": "0",
+      "account_number": "000032018",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - POALEI_AGUDAT_ISRAEL",
+      "bank_number": "52",
+      "bank_branch_number": "0",
+      "account_number": "810230000",
+      "expected_result": false
+    },
+    {
+      "description": "Valid Account - JERUSALEM",
+      "bank_number": "54",
+      "bank_branch_number": "0",
+      "account_number": "123456789",
+      "expected_result": true
+    },
+    {
+      "description": "Valid Account - JERUSALEM",
+      "bank_number": "54",
+      "bank_branch_number": "0",
+      "account_number": "0",
       "expected_result": true
     },
     {
