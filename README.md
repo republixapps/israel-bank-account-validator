@@ -31,7 +31,7 @@ Currently, the supported banks are:
 You can install this package using pip:
 
 ```bash
-pip install israel-bank-account-validator
+pip install git+https://github.com/republixapps/israel-bank-account-validator.git@rc#egg=israel_bank_account_validator
 ```
 
 # Usage

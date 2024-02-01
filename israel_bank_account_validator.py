@@ -224,7 +224,7 @@ def leumi_validator(branch_number, account_number_digits, branch_number_digits) 
         ]):
             res.append(control_digits == '00')
 
-        val = str(100 - check_number)
+        val = f'{100 - check_number:02}'
         res.append(control_digits == val)
 
     return any(res)
