@@ -1,4 +1,20 @@
 {
+  "EASH": [
+    {
+      "bank_number": 3,
+      "account_number": 247652342,
+      "branch_number": 10,
+      "account_length": 9,
+      "expected": true
+    },
+    {
+      "bank_number": 3,
+      "account_number": 247652341,
+      "branch_number": 10,
+      "account_length": 9,
+      "expected": false
+    }
+  ],
   "YAHAV": [
     {
       "bank_number": 482,

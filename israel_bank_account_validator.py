@@ -6,6 +6,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 SUPPORTED_BANKS = {
+    'EASH': 3,
     'YAHAV': 4,
     'ISRAEL_POST': 9,
     'LEUMI': 10,
@@ -22,7 +23,7 @@ SUPPORTED_BANKS = {
     'ARAVEI_ISRAELI': 34,
     'MASAD': 46,
     'POALEI_AGUDAT_ISRAEL': 52,
-    'JERUSALEM': 54
+    'JERUSALEM': 54,
 }
 
 # Constants
@@ -118,6 +119,11 @@ def validate_bank_account(
 
 
 # Define the validator functions depending on the specific rules for each bank.
+def eash_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
+    sum_val = scalar_product(account_number_digits, [9, 8, 7, 6, 5, 4, 3, 2, 1])
+    return sum_val % 11 == 0
+
+
 def yahav_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
     sum_val = scalar_product(account_number_digits[3:9], [6, 5, 4, 3, 2, 1])
     sum_val += scalar_product(branch_number_digits[:4], [9, 8, 7])
@@ -305,6 +311,7 @@ def jerusalem_validator(account_number, branch_number, branch_number_digits) -> 
 
 
 BANK_VALIDATORS = {
+    SUPPORTED_BANKS['EASH']: eash_validator,
     SUPPORTED_BANKS['YAHAV']: yahav_validator,
     SUPPORTED_BANKS['ISRAEL_POST']: israel_post_validator,
     SUPPORTED_BANKS['LEUMI']: leumi_validator,
