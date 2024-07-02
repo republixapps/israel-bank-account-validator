@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='israel_bank_account_validator',
-    version='1.0.1',
+    version='1.0.2',
     description='Validation for israel bank account numbers',
     author='Kirill Goldshtein',
     author_email='kirill@cellosign.com',

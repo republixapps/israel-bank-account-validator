@@ -197,25 +197,32 @@
       "expected_result": true
     },
     {
-      "description": "InValid Account - HSBC",
-      "bank_number": "23",
-      "bank_branch_number": "101",
-      "account_number": "123456789",
-      "expected_result": false
-    },
-    {
-      "description": "InValid Account - HSBC",
-      "bank_number": "23",
-      "bank_branch_number": "101",
-      "account_number": "1456756",
-      "expected_result": false
-    },
-    {
       "description": "Valid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "102",
+      "account_number": "123456001",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "102",
+      "account_number": "123456021",
+      "expected_result": false
+    },
+    {
+      "description": "InValid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "101",
+      "account_number": "1256756",
+      "expected_result": false
+    },
+    {
+      "description": "InValid Account - HSBC",
       "bank_number": "23",
       "bank_branch_number": "101",
       "account_number": "145675488",
-      "expected_result": true
+      "expected_result": false
     },
     {
       "description": "Valid Account - HSBC",

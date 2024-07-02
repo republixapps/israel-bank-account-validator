@@ -159,7 +159,7 @@ def igud_validator(branch_number, account_number_digits, branch_number_digits) -
 
 
 def otsar_hahayal_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
-    sum_val = scalar_product(account_number_digits[:6], [6, 5, 4, 3, 2, 1])
+    sum_val = scalar_product(account_number_digits[3:], [6, 5, 4, 3, 2, 1])
     sum_val += scalar_product(branch_number_digits[:4], [9, 8, 7])
     remainder = sum_val % 11
 
@@ -261,17 +261,11 @@ def citybank_validator(branch_number, account_number_digits, branch_number_digit
 
 def hsbc_validator(branch_number, account_number_digit, branch_number_digits) -> bool:
     if branch_number == 101:
-        # The seventh digit from the left should be 4
-        if account_number_digit[3] != 4:
-            return False
-
+        return account_number_digit[3] == 4
     elif branch_number == 102:
-        # There is only one valid account number: 001
-        if account_number_digit[-3:] != [0, 0, 1]:
-            return False
+        return account_number_digit[-3:] == [0, 0, 1]
 
-    # If no rules were broken, the account number is valid
-    return True
+    return False
 
 
 def beinleumi_validator(branch_number, account_number_digits, branch_number_digits) -> bool:
