@@ -114,6 +114,7 @@ def validate_bank_account(
     account_number_digits = number_digits_to_list(account_number, 9)
     branch_number_digits = number_digits_to_list(branch_number, 3)
 
+    logger.info(f'Validating bank account for bank number {bank_number}, branch number {branch_number}, account number {account_number}')
     # Apply the bank-specific validation rule
     return validator(branch_number, account_number_digits, branch_number_digits)
 
