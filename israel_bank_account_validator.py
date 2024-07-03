@@ -261,7 +261,7 @@ def citybank_validator(branch_number, account_number_digits, branch_number_digit
 
 def hsbc_validator(branch_number, account_number_digit, branch_number_digits) -> bool:
     if branch_number == 101:
-        return account_number_digit[3] == 4
+        return account_number_digit[6] == 4
     elif branch_number == 102:
         return account_number_digit[-3:] == [0, 0, 1]
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.3] - 03-07-2024
+### Added
+- Fixing HSBC formula, for 101 branch
+
 ## [1.0.2] - 02-07-2024
 ### Added
 - Fixing OTSAR_HAHAYAL formula
