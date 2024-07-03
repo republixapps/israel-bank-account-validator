@@ -1,4 +1,7 @@
 # Changelog
+## [1.0.4] - 03-07-2024
+### Added
+- Improved bank account length validation for all banks
 
 ## [1.0.3] - 03-07-2024
 ### Added
