@@ -1,6 +1,20 @@
 {
   "test_cases": [
     {
+      "description": "Valid Account - EASH",
+      "bank_number": "3",
+      "bank_branch_number": "0",
+      "account_number": "143256742",
+      "expected_result": true
+    },
+    {
+      "description": "InValid Account - EASH",
+      "bank_number": "3",
+      "bank_branch_number": "0",
+      "account_number": "543256742",
+      "expected_result": false
+    },
+    {
       "description": "Valid Account - YAHAV",
       "bank_number": "4",
       "bank_branch_number": "284",
@@ -200,42 +214,49 @@
       "description": "InValid Account - HSBC",
       "bank_number": "23",
       "bank_branch_number": "101",
-      "account_number": "123456789",
+      "account_number": "123454689",
       "expected_result": false
     },
     {
       "description": "InValid Account - HSBC",
       "bank_number": "23",
       "bank_branch_number": "101",
-      "account_number": "1456756",
+      "account_number": "123456849",
+      "expected_result": false
+    },
+    {
+      "description": "InValid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "101",
+      "account_number": "123456749",
       "expected_result": false
     },
     {
       "description": "Valid Account - HSBC",
       "bank_number": "23",
-      "bank_branch_number": "101",
-      "account_number": "145675488",
+      "bank_branch_number": "102",
+      "account_number": "123456001",
       "expected_result": true
     },
     {
-      "description": "Valid Account - HSBC",
+      "description": "InValid Account - HSBC",
+      "bank_number": "23",
+      "bank_branch_number": "102",
+      "account_number": "123456021",
+      "expected_result": false
+    },
+    {
+      "description": "InValid Account - HSBC",
       "bank_number": "23",
       "bank_branch_number": "103",
       "account_number": "123456789",
       "expected_result": false
     },
     {
-      "description": "Valid Account - HSBC",
-      "bank_number": "23",
-      "bank_branch_number": "101",
-      "account_number": "12345648",
-      "expected_result": false
-    },
-    {
       "description": "Valid Account - BEINLEUMI",
       "bank_number": "31",
       "bank_branch_number": "0",
-      "account_number": "000032018",
+      "account_number": "32018",
       "expected_result": true
     },
     {
@@ -277,7 +298,7 @@
       "description": "Valid Account - POALEI_AGUDAT_ISRAEL",
       "bank_number": "52",
       "bank_branch_number": "0",
-      "account_number": "000032018",
+      "account_number": "32018",
       "expected_result": true
     },
     {

@@ -1,4 +1,16 @@
 # Changelog
+## [1.0.4] - 03-07-2024
+### Added
+- Improved bank account length validation for all banks
+
+## [1.0.3] - 03-07-2024
+### Added
+- Fixing HSBC formula, for 101 branch
+
+## [1.0.2] - 02-07-2024
+### Added
+- Fixing OTSAR_HAHAYAL formula
+- Fixing HSBC formula
 
 ## [1.0.1] - 22-01-2024
 ### Added
