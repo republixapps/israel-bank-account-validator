@@ -1,4 +1,4 @@
-from setuptools import find_packages
+#!/usr/bin/env python
 from setuptools import setup
 
 setup(
