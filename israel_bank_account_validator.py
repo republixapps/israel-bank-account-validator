@@ -41,7 +41,7 @@ def convert_to_int(input_value):
         return input_value
     except Exception as e:
         logger.error(e)
-        raise ValueError('Could not convert to int')
+        raise ValueError('Could not convert to int') from e
 
 
 def scalar_product(arr1, arr2):
@@ -72,12 +72,8 @@ class UnsupportedBankError(Exception):
     pass
 
 
-
-
 def validate_bank_account(
-        bank_number: Union[int, str],
-        branch_number: Union[int, str],
-        account_number: Union[int, str]
+    bank_number: Union[int, str], branch_number: Union[int, str], account_number: Union[int, str]
 ) -> bool:
     try:
         # Convert to integers if necessary
@@ -207,25 +203,25 @@ def leumi_validator(branch_number, account_number_digits, branch_number_digits, 
     FIFTH_DIGIT = 4
     SIXTS_DIGIT = 5
 
-
     account_types = [110, 128, 180, 330, 340]
     account_multipliers = [7, 6, 5, 4, 3, 2]
     branch_multipliers = [10, 9, 8]
 
-    total = \
-        scalar_product(account_number_digits[:FIRST_SIX_DIGITS], account_multipliers) + \
-        scalar_product(branch_number_digits, branch_multipliers)
+    total = scalar_product(account_number_digits[:FIRST_SIX_DIGITS], account_multipliers) + scalar_product(
+        branch_number_digits, branch_multipliers
+    )
 
     is_skip_110_account_type = False
-    account_number_digits_threshold = ''.join([
-        str(account_number_digits[FIFTH_DIGIT]),
-        str(account_number_digits[SIXTS_DIGIT])
-    ])
+    account_number_digits_threshold = ''.join(
+        [str(account_number_digits[FIFTH_DIGIT]), str(account_number_digits[SIXTS_DIGIT])]
+    )
 
-    if any([
-        (account_number_digits_threshold not in ('20', '23', '00') and branch_number in (800, 864)),
-        (account_number_digits_threshold not in ('00', ) and branch_number not in (800, 864)),  # test this 00
-    ]):
+    if any(
+        [
+            (account_number_digits_threshold not in ('20', '23', '00') and branch_number in (800, 864)),
+            (account_number_digits_threshold not in ('00',) and branch_number not in (800, 864)),  # test this 00
+        ]
+    ):
         is_skip_110_account_type = True
 
     control_digits = ''.join([str(x) for x in account_number_digits[-2:]])
@@ -239,10 +235,12 @@ def leumi_validator(branch_number, account_number_digits, branch_number_digits, 
 
         ones = check_number % 10
         tenth = int((check_number - ones) / 10) if (check_number - ones) > 10 else 0
-        if all([
-            ones == 0,
-            tenth == 0,
-        ]):
+        if all(
+            [
+                ones == 0,
+                tenth == 0,
+            ]
+        ):
             res.append(control_digits == '00')
 
         val = f'{100 - check_number:02}'

@@ -1,0 +1,117 @@
+line-length = 119
+target-version = "py312"
+
+
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+
+
+[lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+
+fixable = [
+  "I",
+  "UP",
+  "F401"
+]
+
+ignore = [
+    "ANN204",
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D104",
+    "D105",
+    "D106",
+    "D107",
+    "D202",
+    "D203",
+    "D400",
+    "D401",
+    "D403",
+    "D413",
+    "E203",
+    "E501",
+    "E731",
+    "F403",
+    "FA100",
+    "FA102",
+    "N806",
+    "PGH004",
+    "PTH102",
+    "PTH103",
+    "PTH107",
+    "PTH110",
+    "PTH112",
+    "PTH113",
+    "PTH118",
+    "PTH119",
+    "PTH120",
+    "PTH123",
+    "RUF100"
+]
+
+[format]
+quote-style = "single"
+indent-style = "space"
+line-ending = "auto"
+
+[lint.flake8-quotes]
+inline-quotes = "single"
+
+[lint.isort]
+case-sensitive = false
+force-single-line = true
+force-sort-within-sections = false
+known-first-party = ["formsapi"]
+from-first = false
+detect-same-package = false
+length-sort = false
+order-by-type = false
+known-third-party = ["allure"]
+
+[lint.pycodestyle]
+max-line-length = 119
+
+[lint.pydocstyle]
+convention = "google"

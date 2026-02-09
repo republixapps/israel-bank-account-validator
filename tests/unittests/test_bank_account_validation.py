@@ -10,10 +10,10 @@ from israel_bank_account_validator import UnsupportedBankError
 from israel_bank_account_validator import validate_bank_account
 
 EXCEPTIONS = {
-    "BankNumberValueError": BankNumberValueError,
-    "BankBranchNumberValueError": BankBranchNumberValueError,
-    "BankAccountNumberValueError": BankAccountNumberValueError,
-    "UnsupportedBankError": UnsupportedBankError
+    'BankNumberValueError': BankNumberValueError,
+    'BankBranchNumberValueError': BankBranchNumberValueError,
+    'BankAccountNumberValueError': BankAccountNumberValueError,
+    'UnsupportedBankError': UnsupportedBankError,
 }
 
 
@@ -23,10 +23,10 @@ def load_test_data():
     return data['test_cases']
 
 
-@allure.story("Validate bank account")
-@allure.feature("Bank account validation")
-@allure.title("Test bank account validation")
-@allure.description("Check bank account validation")
+@allure.story('Validate bank account')
+@allure.feature('Bank account validation')
+@allure.title('Test bank account validation')
+@allure.description('Check bank account validation')
 @pytest.mark.parametrize('test_case', load_test_data())
 def test_bank_account_validation(test_case):
     description = test_case['description']

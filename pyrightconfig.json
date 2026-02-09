@@ -1,0 +1,8 @@
+{
+  "include": [
+    "formsapi",
+    "tests"
+  ],
+  "pythonVersion": "3.12",
+  "pythonPlatform": "Linux",
+}

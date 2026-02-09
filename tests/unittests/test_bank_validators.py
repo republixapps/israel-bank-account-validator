@@ -24,18 +24,18 @@ def load_data():
 TEST_DATA = load_data()
 
 
-@allure.feature("Bank account validation")
-@allure.story("Validate bank account")
-@allure.title("Test bank account validation")
-@allure.description("Check bank account validation")
-@pytest.mark.parametrize("bank_name, bank_number, account_number, branch_number, account_length, expected", TEST_DATA)
+@allure.feature('Bank account validation')
+@allure.story('Validate bank account')
+@allure.title('Test bank account validation')
+@allure.description('Check bank account validation')
+@pytest.mark.parametrize('bank_name, bank_number, account_number, branch_number, account_length, expected', TEST_DATA)
 def test_bank_validators(bank_name, bank_number, account_number, branch_number, account_length, expected):
     bank_validator = BANK_VALIDATORS[SUPPORTED_BANKS[bank_name]]
 
-    with allure.step(f"Validate bank account for {bank_name}"):
+    with allure.step(f'Validate bank account for {bank_name}'):
         validated = bank_validator(
             branch_number,
             number_digits_to_list(account_number, account_length),
-            number_digits_to_list(branch_number, 3)
+            number_digits_to_list(branch_number, 3),
         )
         assert validated == expected
