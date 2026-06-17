@@ -20,28 +20,28 @@
       "bank_number": 482,
       "account_number": 50067,
       "branch_number": 284,
-      "account_length": 9,
+      "account_length": 6,
       "expected": true
     },
     {
       "bank_number": 482,
       "account_number": 760051,
       "branch_number": 482,
-      "account_length": 9,
+      "account_length": 6,
       "expected": false
     },
     {
       "bank_number": 9,
       "account_number": 0,
       "branch_number": 9,
-      "account_length": 9,
+      "account_length": 6,
       "expected": false
     },
     {
       "bank_number": 0,
       "account_number": 50067,
       "branch_number": 0,
-      "account_length": 9,
+      "account_length": 6,
       "expected": true
     }
   ],
@@ -91,7 +91,7 @@
       "expected": false
     }
   ],
-    "DISCOUNT": [
+  "DISCOUNT": [
     {
       "bank_number": 0,
       "account_number": 32018,
@@ -128,14 +128,14 @@
       "bank_number": 571,
       "account_number": 41116,
       "branch_number": 571,
-      "account_length": 9,
+      "account_length": 5,
       "expected": true
     },
     {
       "bank_number": 175,
       "account_number": 11143,
       "branch_number": 175,
-      "account_length": 9,
+      "account_length": 5,
       "expected": true
     }
   ],
@@ -192,14 +192,14 @@
       "bank_number": 6,
       "account_number": 160778,
       "branch_number": 6,
-      "account_length": 9,
+      "account_length": 6,
       "expected": true
     },
     {
       "bank_number": 106,
       "account_number": 160771,
       "branch_number": 106,
-      "account_length": 9,
+      "account_length": 6,
       "expected": true
     }
   ],
@@ -223,13 +223,13 @@
     {
       "bank_number": 23,
       "account_number": 123456489,
-      "branch_number": 0,
+      "branch_number": 101,
       "account_length": 9,
       "expected": true
     },
     {
       "bank_number": 23,
-      "account_number": 123256489,
+      "account_number": 123256789,
       "branch_number": 101,
       "account_length": 9,
       "expected": false
@@ -240,14 +240,14 @@
       "bank_number": 0,
       "account_number": 32018,
       "branch_number": 0,
-      "account_length": 9,
+      "account_length": 5,
       "expected": true
     },
     {
       "bank_number": 0,
       "account_number": 132018,
       "branch_number": 0,
-      "account_length": 9,
+      "account_length": 6,
       "expected": true
     }
   ],
@@ -256,14 +256,14 @@
       "bank_number": 571,
       "account_number": 41116,
       "branch_number": 571,
-      "account_length": 9,
+      "account_length": 5,
       "expected": true
     },
     {
       "bank_number": 505,
       "account_number": 241110,
       "branch_number": 505,
-      "account_length": 9,
+      "account_length": 6,
       "expected": true
     }
   ],
