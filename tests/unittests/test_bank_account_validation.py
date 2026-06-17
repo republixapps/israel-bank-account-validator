@@ -1,4 +1,5 @@
 import json
+import os
 
 import allure
 import pytest
@@ -18,7 +19,8 @@ EXCEPTIONS = {
 
 
 def load_test_data():
-    with open('data/test_bank_account_data.json') as f:
+    file_ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'test_bank_account_data.json')
+    with open(file_) as f:
         data = json.load(f)
     return data['test_cases']
 

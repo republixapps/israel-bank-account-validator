@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=70.2.0", "wheel>=0.43.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "israel_bank_account_validator"
+version = "1.0.4"
+description = "Validation for israel bank account numbers"
+requires-python = ">=3.12,<3.15"
+
+[tool.setuptools]
+py-modules = ["israel_bank_account_validator"]
+
+[dependency-groups]
+dev = [
+    "allure-pytest>=2.13.2",
+    "pytest>=7.4.0",
+    "ruff>=0.4.0",
+    "teamcity-messages>=1.30",
+]
+
+[tool.pytest.ini_options]
+markers = ["live: marks tests uses real database (deselect with '-m \"not live\"')"]

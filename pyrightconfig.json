@@ -1,6 +1,6 @@
 {
   "include": [
-    "formsapi",
+    "israel_bank_account_validator.py",
     "tests"
   ],
   "pythonVersion": "3.12",
