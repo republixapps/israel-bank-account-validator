@@ -1,6 +1,6 @@
 version = 1
 revision = 3
-requires-python = ">=3.12, <3.15"
+requires-python = ">=3.13, <3.15"
 
 [[package]]
 name = "allure-pytest"
@@ -52,7 +52,7 @@ version = "2.3.0"
 source = { registry = "https://pypi.az.cellosign.com/cellosign/dev/simple" }
 sdist = { url = "https://pypi.az.cellosign.com/cellosign/dev/packages/iniconfig/iniconfig-2.3.0.tar.gz", hash = "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730" }
 wheels = [
-    { url = "https://pypi.az.cellosign.com/cellosign/dev/packages/iniconfig/iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12", size = 7484 },
+    { url = "https://pypi.az.cellosign.com/cellosign/dev/packages/iniconfig/iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12" },
 ]
 
 [[package]]
@@ -84,7 +84,7 @@ version = "26.2"
 source = { registry = "https://pypi.az.cellosign.com/cellosign/dev/simple" }
 sdist = { url = "https://pypi.az.cellosign.com/cellosign/dev/packages/packaging/packaging-26.2.tar.gz", hash = "sha256:ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661" }
 wheels = [
-    { url = "https://pypi.az.cellosign.com/cellosign/dev/packages/packaging/packaging-26.2-py3-none-any.whl", hash = "sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e", size = 100195 },
+    { url = "https://pypi.az.cellosign.com/cellosign/dev/packages/packaging/packaging-26.2-py3-none-any.whl", hash = "sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e" },
 ]
 
 [[package]]
@@ -93,7 +93,7 @@ version = "1.6.0"
 source = { registry = "https://pypi.az.cellosign.com/cellosign/dev/simple" }
 sdist = { url = "https://pypi.az.cellosign.com/cellosign/dev/packages/pluggy/pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3" }
 wheels = [
-    { url = "https://pypi.az.cellosign.com/cellosign/dev/packages/pluggy/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746", size = 20538 },
+    { url = "https://pypi.az.cellosign.com/cellosign/dev/packages/pluggy/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746" },
 ]
 
 [[package]]

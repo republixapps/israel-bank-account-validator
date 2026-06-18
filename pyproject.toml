@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "israel_bank_account_validator"
 version = "1.0.4"
 description = "Validation for israel bank account numbers"
-requires-python = ">=3.12,<3.15"
+requires-python = ">=3.13,<3.15"
 
 [tool.setuptools]
 py-modules = ["israel_bank_account_validator"]
@@ -21,3 +21,13 @@ dev = [
 
 [tool.pytest.ini_options]
 markers = ["live: marks tests uses real database (deselect with '-m \"not live\"')"]
+
+
+[tool.uv]
+package = true
+extra-index-url = ["https://pypi.az.cellosign.com/cellosign/dev/simple"]
+
+[[tool.uv.index]]
+name = "cellosign"
+url = "https://pypi.az.cellosign.com/cellosign/dev/simple"
+explicit = true
