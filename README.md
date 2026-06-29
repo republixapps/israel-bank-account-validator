@@ -1,7 +1,9 @@
 # Israel Bank Account Validator
+
 Based on the MASAV bank account validation documentation (available [here](https://www.masav.co.il/media/2473/bdikat_hukiot_heshbon.pdf)), this package provides functions and classes to validate Israeli bank account numbers for supported banks.
 
 ## Features
+
 Validates bank account numbers for various supported Israeli banks.
 Provides detailed logging for easy debugging.
 Supports multiple data types (integers or strings) for input.
@@ -28,13 +30,13 @@ Currently, the supported banks are:
 + JERUSALEM
 
 ## Installation
-You can install this package using pip:
 
 ```bash
-pip install git+https://github.com/republixapps/israel-bank-account-validator.git@rc#egg=israel_bank_account_validator
+uv add git+https://github.com/republixapps/israel-bank-account-validator.git@rc
 ```
 
 # Usage
+
 Import the required functions and classes and use the validate_bank_account function:
 
 ```python
@@ -58,6 +60,7 @@ except Exception as e:
 ```
 
 You can also call individual bank validators:
+
 ```python
 from israel_bank_account_validator import leumi_validator, number_digits_to_list
 account_to_digits = number_digits_to_list(account_number, 9)  # 07869660
@@ -66,29 +69,28 @@ isValid = leumi_validator(branch_number, account_to_digits, branch_to_digits)
 print(isValid) # prints either True or False
 ```
 
-# Running Tests
-This package comes with two test suites:
+## Building
 
-+ test_bank_validators.py - Tests the validation logic for each individual bank.
-+ test_bank_account_validation.py - Tests the overall account validation function.
-To run the tests, ensure you have pytest installed:
-
-To run the tests, ensure you have pytest installed:
 ```bash
-pip install pytest
+uv build
 ```
 
-Then run the tests using the following:
+# Running Tests
+
+Install dependencies and run the tests using uv:
 
 ```bash
-pytest test_bank_validators.py
-pytest test_bank_account_validation.py
-````
+uv sync --group dev
+uv run pytest tests/
+```
+
 Test cases are sourced from JSON files, ensuring easy maintenance and expansion.
+
 + test_bank_account_data.json - Contains test cases for the overall account validation function.
 + test_bank_validators_data.json - Contains test cases for each individual bank validation function.
 
 ## Error Handling
+
 The package provides specific exceptions for various error scenarios:
 
 + BankNumberValueError: Raised when the bank number is invalid.
@@ -97,4 +99,5 @@ The package provides specific exceptions for various error scenarios:
 + UnsupportedBankError: Raised when the provided bank is not supported.
 
 # License
+
 This library is licensed under the MIT License.
