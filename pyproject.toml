@@ -14,13 +14,37 @@ py-modules = ["israel_bank_account_validator"]
 [dependency-groups]
 dev = [
     "allure-pytest>=2.13.2",
-    "pytest>=7.4.0",
+    "coverage",
+    "flake8",
+    "flake8-bugbear",
+    "flake8-builtins",
+    "flake8-comprehensions",
+    "flake8-deprecated",
+    "flake8-docstrings",
+    "flake8-isort",
+    "flake8-linenumber",
+    "flake8-plugin-utils",
+    "flake8-pytest-style",
+    "flake8-quotes",
+    "flake8-secure-coding-standard",
+    "isort",
+    "pyflakes",
+    "pytest>=8.2.2",
+    "pytest-cov>=4.0.0",
     "ruff>=0.4.0",
     "teamcity-messages>=1.30",
 ]
 
 [tool.pytest.ini_options]
-markers = ["live: marks tests uses real database (deselect with '-m \"not live\"')"]
+markers = [
+    "live: marks tests that use real database (deselect with '-m \"not live\"')",
+]
+
+[tool.isort]
+force_single_line = true
+known_first_party = ["israel_bank_account_validator"]
+order_by_type = false
+line_length = 119
 
 
 [tool.uv]

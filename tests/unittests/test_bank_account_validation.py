@@ -19,7 +19,7 @@ EXCEPTIONS = {
 
 
 def load_test_data():
-    file_ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'test_bank_account_data.json')
+    file_ = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data', 'test_bank_account_data.json')
     with open(file_) as f:
         data = json.load(f)
     return data['test_cases']

@@ -10,7 +10,7 @@ from israel_bank_account_validator import SUPPORTED_BANKS
 
 
 def load_data():
-    file_ = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'test_bank_validators_data.json')
+    file_ = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'data', 'test_bank_validators_data.json')
     with open(file_) as f:
         data = json.load(f)
 
@@ -28,7 +28,7 @@ TEST_DATA = load_data()
 @allure.story('Validate bank account')
 @allure.title('Test bank account validation')
 @allure.description('Check bank account validation')
-@pytest.mark.parametrize('bank_name, bank_number, account_number, branch_number, account_length, expected', TEST_DATA)
+@pytest.mark.parametrize(('bank_name', 'bank_number', 'account_number', 'branch_number', 'account_length', 'expected'), TEST_DATA)
 def test_bank_validators(bank_name, bank_number, account_number, branch_number, account_length, expected):
     bank_validator = BANK_VALIDATORS[SUPPORTED_BANKS[bank_name]]
 
